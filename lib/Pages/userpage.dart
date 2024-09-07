@@ -1,7 +1,10 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:munimuniohagi/Pages/favorite.dart';
 import 'package:munimuniohagi/Pages/post.dart';
+import 'package:munimuniohagi/firebase_method.dart';
 
 class userPage extends HookWidget {
   const userPage({super.key});
@@ -35,6 +38,8 @@ class userPage extends HookWidget {
                 ),
                 onPressed: () {
                   // アイコンがタップされたときの処理をここに追加
+                  final service = FirestoreService();
+                  service.read();
                 },
               ),
               SizedBox(width: 20),
