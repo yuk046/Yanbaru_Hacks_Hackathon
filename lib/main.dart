@@ -1,13 +1,15 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:munimuniohagi/Pages/akinatorPage.dart';
 import 'package:munimuniohagi/Pages/pin.dart';
-import 'package:munimuniohagi/Pages/user.dart';
 import 'package:munimuniohagi/Pages/start.dart';
 import 'package:munimuniohagi/Pages/userpage.dart';
 
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -50,9 +52,9 @@ class HomePage extends HookWidget {
 
     // 各タブに表示するページのリスト
     final List<Widget> _pages = <Widget>[
-      const AkinatorPage(),
-      const BusinessPage(),
-      const userPage()
+      AkinatorPage(),
+      BusinessPage(),
+      userPage()
     ];
 
     // タブが選択された時にインデックスを更新するメソッド

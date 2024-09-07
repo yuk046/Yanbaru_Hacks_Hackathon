@@ -4,16 +4,30 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:munimuniohagi/Pages/favorite.dart';
 import 'package:munimuniohagi/Pages/post.dart';
-import 'package:munimuniohagi/firebase_method.dart';
+import 'package:munimuniohagi/firebase_user.dart';
 
 class userPage extends HookWidget {
   const userPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final service = FirestoreService();
+
     final img = useState('https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Stop_hand.svg/80px-Stop_hand.svg.png');
     final userID = useState('sadff325hjksadf');
-    final userName = useState('まっちゃん');
+    final userName = useState<String?>('cPs60CsrA6upTT55wo64');
+
+    useEffect(() {
+      Future<void> fetchData() async {
+        try {
+          userName.value = await service.readUserName('cPs60CsrA6upTT55wo64');
+        } catch (e) {
+          print('データ取得エラー: $e');
+        }
+      }
+      fetchData();
+      return null;
+    }, []);
 
     final TabController _tabController = useTabController(initialLength: 2);
     final screenHeight = MediaQuery.of(context).size.height;
@@ -38,8 +52,6 @@ class userPage extends HookWidget {
                 ),
                 onPressed: () {
                   // アイコンがタップされたときの処理をここに追加
-                  final service = FirestoreService();
-                  service.read();
                 },
               ),
               SizedBox(width: 20),
@@ -69,7 +81,7 @@ class userPage extends HookWidget {
                 ),
                 SizedBox(height: 4),
                 Text(
-                  userName.value,
+                  '${userName.value ?? '不明'}',
                   style: TextStyle(
                       fontSize: 25,
                       color: Colors.black,
