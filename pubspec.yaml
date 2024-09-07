@@ -41,6 +41,7 @@ dependencies:
   google_fonts: ^6.2.0
   firebase_core: ^3.4.0
   cloud_firestore: ^5.4.0
+  csv: ^6.0.0
   google_generative_ai:
 
 dev_dependencies:
