@@ -13,31 +13,70 @@ class StartPage extends StatelessWidget {
       backgroundColor: Color(Constant.backGroundColor),
       body: Column(
         children: [
-          SizedBox(height: deviceHeight * 0.1),
+          SizedBox(height: deviceHeight * 0.12),
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
             // ロゴ画像
-            child: Center(
-              child: Container(
-                child: Image.asset('assets/images/munimuni.png'),
-                width: deviceWidth * 0.8,
-                ),
-            )
+            child:
+              Center(
+                child: Container(
+                  child: Image.asset('assets/images/munimuni.png'),
+                  width: deviceWidth * 0.8,
+                  ),
+              ),
+          ),
+          SizedBox(height: deviceHeight * 0.18),
+          Padding( // ゲストスタートボタン
+            padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+            child: 
+              Center(
+                child: ElevatedButton(
+                  onPressed: () {
+                    // ボタンを押すとホーム画面に遷移
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => const HomePage(title: 'HomePage')),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    fixedSize: Size(deviceWidth * 0.7, deviceHeight * 0.08),
+                    backgroundColor: Color(0xffFFE2C6),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
 
+                  ),
+                  child: Text('ゲストとしてスタート'),
+                ),
+              )
+          ),
+          SizedBox(height: deviceHeight * 0.05),
+          Padding( // ログインスタートボタン
+            padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+            child: 
+              Center(
+                child: ElevatedButton(
+                  onPressed: () {
+                    // toDo: ボタンを押すとログインページに遷移
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => const HomePage(title: 'HomePage')),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    fixedSize: Size(deviceWidth * 0.7, deviceHeight * 0.08),
+                    backgroundColor: Color(0xffFFE2C6),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+
+                  ),
+                  child: Text('ログインしてスタート'),
+                ),
+              )
           ),
         ],
       ),
     );
   }
 }
-
-// child: ElevatedButton(
-//           onPressed: () {
-//             // ボタンを押すとホーム画面に遷移
-//             Navigator.pushReplacement(
-//               context,
-//               MaterialPageRoute(builder: (context) => const HomePage(title: 'HomePage')),
-//             );
-//           },
-//           child: Text('Start'),
-//         ),
