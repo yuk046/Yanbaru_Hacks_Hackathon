@@ -1,56 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:munimuniohagi/Pages/test.dart';
 
-// カスタムクラス favoriteEvent
-class favoriteEvent {
-  final String name;
-  final String place;
-  final String date; // 日付
-  final String time; // 時間
-  final String img;
-
-  favoriteEvent({
-    required this.name, 
-    required this.place, 
-    required this.date, // 日付
-    required this.time, // 時間
-    required this.img
-  });
-}
-
-// メインのアプリケーション
 class favorite extends HookWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        body: favoriteEventList(),
-      ),
-    );
-  }
-}
+    // フックを使って状態を管理
+    final favoriteEvents = useState<List<favoriteEvent>>([]);
+    final userId = 'exampleUserId'; // 実際のユーザー ID に置き換えてください
 
-// favoriteEventリストを表示するWidget
-class favoriteEventList extends HookWidget {
-  @override
-  Widget build(BuildContext context) {
-    // フックを使ってfavoriteEventsリストを状態管理
-    final favoriteEvents = useState<List<favoriteEvent>>([
-      favoriteEvent(
-        name: "ハッカソン2024", 
-        place: "名護市辺野古", 
-        date: "2024年5月12日", // 日付
-        time: "10:00〜16:00", // 時間
-        img: "https://aozorataxi.okinawa/wp-content/uploads/2023/08/okinawa_eisa.png",
-      ),
-      favoriteEvent(
-        name: "那覇ハーリー祭り", 
-        place: "那覇市", 
-        date: "2024年6月3日", // 日付
-        time: "9:00〜18:00", // 時間
-        img: "https://aozorataxi.okinawa/wp-content/uploads/2023/08/okinawa_eisa.png",
-      ),
-    ]);
+    useEffect(() {
+      // Firestore からデータを取得
+      Future<void> fetchData() async {
+        try {
+          final events = await getFavoritesByUserId(userId);
+          favoriteEvents.value = events;
+        } catch (e) {
+          print('Error fetching data: $e');
+        }
+      }
+      
+      fetchData();
+      return null; // Clean up function, not needed here
+    }, []);
 
     return ListView.builder(
       itemCount: favoriteEvents.value.length,
@@ -103,17 +75,6 @@ class favoriteEventList extends HookWidget {
                         overflow: TextOverflow.ellipsis, // テキストが長い場合に省略表示
                       ),
                       SizedBox(height: 5),
-                      Text(
-                        event.date, // 日付の表示
-                        style: TextStyle(fontSize: 14, color: Colors.grey[600]),
-                        overflow: TextOverflow.ellipsis, // テキストが長い場合に省略表示
-                      ),
-                      SizedBox(height: 5),
-                      Text(
-                        event.time, // 時間の表示
-                        style: TextStyle(fontSize: 14, color: Colors.grey[600]),
-                        overflow: TextOverflow.ellipsis, // テキストが長い場合に省略表示
-                      ),
                     ],
                   ),
                 ),
