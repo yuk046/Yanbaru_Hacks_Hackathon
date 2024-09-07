@@ -10,7 +10,7 @@ class AkinatorResultPage extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      backgroundColor: Color(Constant.mainBackGround),
+      backgroundColor: Color(Constant.mainBackGroundColor),
       appBar: AppBar(
         leading: IconButton(
           onPressed: () => {
