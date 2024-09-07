@@ -1,18 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:munimuniohagi/main.dart';
 
-class StartPage extends HookWidget {
+class StartPage extends StatelessWidget {
   const StartPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          Text("こんにちは")
-        ],
+      body: Center(
+        
       ),
-      backgroundColor: Color(0xffE2C6FF),
     );
   }
 }
+
+// child: ElevatedButton(
+//           onPressed: () {
+//             // ボタンを押すとホーム画面に遷移
+//             Navigator.pushReplacement(
+//               context,
+//               MaterialPageRoute(builder: (context) => const HomePage(title: 'HomePage')),
+//             );
+//           },
+//           child: Text('Start'),
+//         ),
