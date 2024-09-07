@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:munimuniohagi/Pages/home.dart';
+import 'package:munimuniohagi/Pages/akinatorPage.dart';
 import 'package:munimuniohagi/Pages/pin.dart';
 import 'package:munimuniohagi/Pages/user.dart';
 import 'package:munimuniohagi/Pages/start.dart';
@@ -46,7 +46,7 @@ class HomePage extends HookWidget {
 
     // 各タブに表示するページのリスト
     final List<Widget> _pages = <Widget>[
-      const BookPage(),
+      const AkinatorPage(),
       const BusinessPage(),
       const UserPage()
     ];
@@ -67,7 +67,7 @@ class HomePage extends HookWidget {
           bottom: bottomPadding,
           left: horizontalPadding,
           right: horizontalPadding,
-        ), 
+        ),
         child: Container(
           decoration: BoxDecoration(
             color: Color(0xffE2C6FF), // 背景色
@@ -85,7 +85,7 @@ class HomePage extends HookWidget {
             currentIndex: _selectedIndex.value,
             onTap: _onItemTapped,
             items: <BottomNavigationBarItem>[
-BottomNavigationBarItem(
+              BottomNavigationBarItem(
                 icon: Padding(
                   padding: EdgeInsets.only(top: iconTopPadding),
                   child: Icon(Icons.home, size: 30),

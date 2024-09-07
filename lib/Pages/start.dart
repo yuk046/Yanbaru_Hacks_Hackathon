@@ -8,7 +8,16 @@ class StartPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        
+        child: ElevatedButton(
+          onPressed: () {
+            // ボタンを押すとホーム画面に遷移
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => const HomePage(title: 'HomePage')),
+            );
+          },
+          child: Text('Start'),
+        ),
       ),
     );
   }
