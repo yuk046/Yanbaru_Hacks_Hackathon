@@ -84,7 +84,7 @@ class HomePage extends HookWidget {
             currentIndex: _selectedIndex.value,
             onTap: _onItemTapped,
             items: <BottomNavigationBarItem>[
-BottomNavigationBarItem(
+              BottomNavigationBarItem(
                 icon: Padding(
                   padding: EdgeInsets.only(top: iconTopPadding),
                   child: Icon(Icons.home, size: 30),
