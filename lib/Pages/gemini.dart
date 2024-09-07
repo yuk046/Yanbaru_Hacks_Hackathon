@@ -1,4 +1,4 @@
-// import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
 
 const apiKey = "AIzaSyAHtrmyvqtz0fPT6C629b94-ZLVtLtfim8";
