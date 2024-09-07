@@ -3,6 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:munimuniohagi/Pages/home.dart';
 import 'package:munimuniohagi/Pages/pin.dart';
 import 'package:munimuniohagi/Pages/user.dart';
+import 'package:munimuniohagi/Pages/start.dart';
 import 'package:munimuniohagi/Pages/userpage.dart';
 
 void main() {
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const HomePage(title: 'Home Page'),
+      home: const StartPage(),
     );
   }
 }
