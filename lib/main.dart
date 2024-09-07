@@ -6,6 +6,8 @@ import 'package:munimuniohagi/Pages/iventListPage.dart';
 import 'package:munimuniohagi/Pages/start.dart';
 import 'package:munimuniohagi/Pages/userpage.dart';
 import 'package:munimuniohagi/firebase_options.dart';
+import 'package:munimuniohagi/Pages/gemini.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
