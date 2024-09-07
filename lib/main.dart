@@ -6,6 +6,7 @@ import 'package:munimuniohagi/Pages/user.dart';
 import 'package:munimuniohagi/Pages/start.dart';
 import 'package:munimuniohagi/Pages/userpage.dart';
 
+
 void main() {
   runApp(const MyApp());
 }
@@ -20,6 +21,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
+
+        // フォントの設定
+        fontFamily: 'dotGothic16',
       ),
       home: const StartPage(),
     );
