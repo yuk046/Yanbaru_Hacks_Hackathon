@@ -52,7 +52,7 @@ class HomePage extends HookWidget {
     final List<Widget> _pages = <Widget>[
       const AkinatorPage(),
       const BusinessPage(),
-      const UserPage()
+      const userPage()
     ];
 
     // タブが選択された時にインデックスを更新するメソッド
