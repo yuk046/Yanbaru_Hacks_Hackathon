@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:munimuniohagi/Pages/home.dart';
 import 'package:munimuniohagi/Pages/pin.dart';
-import 'package:munimuniohagi/Pages/start.dart';
+import 'package:munimuniohagi/Pages/user.dart';
 import 'package:munimuniohagi/Pages/userpage.dart';
 
 void main() {
@@ -47,7 +47,7 @@ class HomePage extends HookWidget {
     final List<Widget> _pages = <Widget>[
       const BookPage(),
       const BusinessPage(),
-      const StartPage()
+      const UserPage()
     ];
 
     // タブが選択された時にインデックスを更新するメソッド
