@@ -1,4 +1,5 @@
 class Constant {
-  static const backGroundColor = 0xFFE2C6FF; //背景色 -argb
-  
+  //色関係　-argb
+  static final backGroundColor = 0xFFE2C6FF; //スタート画面の背景色
+  static final mainBackGround = 0xffFAF6FF; //デフォルトの背景色
 }
