@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "842149269614",
+    "project_id": "eitherofeisa",
+    "storage_bucket": "eitherofeisa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:842149269614:android:d204f5ed0a1f0f961ad67f",
+        "android_client_info": {
+          "package_name": "com.example.munimuniohagi"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBcLyBMaDcL97SGazsHqfyBsMKmuOPVdA4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

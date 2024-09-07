@@ -1,15 +1,20 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:munimuniohagi/Pages/akinatorPage.dart';
-import 'package:munimuniohagi/Pages/pin.dart';
-import 'package:munimuniohagi/Pages/user.dart';
+import 'package:munimuniohagi/Pages/iventListPage.dart';
 import 'package:munimuniohagi/Pages/start.dart';
 import 'package:munimuniohagi/Pages/userpage.dart';
+import 'package:munimuniohagi/firebase_options.dart';
 import 'package:munimuniohagi/Pages/gemini.dart';
 
 
-void main() async{
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  ); // Firebaseを初期化
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -52,8 +57,8 @@ class HomePage extends HookWidget {
     // 各タブに表示するページのリスト
     final List<Widget> _pages = <Widget>[
       const AkinatorPage(),
-      const BusinessPage(),
-      const UserPage()
+      const EventListPage(),
+      const userPage()
     ];
 
     // タブが選択された時にインデックスを更新するメソッド
