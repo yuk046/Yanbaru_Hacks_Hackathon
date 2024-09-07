@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:munimuniohagi/Pages/favorite.dart';
+import 'package:munimuniohagi/Pages/post.dart';
 
 class userPage extends HookWidget {
   const userPage({super.key});
@@ -100,7 +101,7 @@ class userPage extends HookWidget {
                     controller: _tabController,
                     children: [
                       favorite(),
-                      Center(child: Text('タブ2の内容')),
+                      post(),
                     ],
                   ),
                 ),

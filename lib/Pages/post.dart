@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
 // カスタムクラス favoriteEvent
-class favoriteEvent {
+class postEvent {
   final String name;
   final String place;
   final String date; // 日付
   final String time; // 時間
   final String img;
 
-  favoriteEvent({
+  postEvent({
     required this.name, 
     required this.place, 
     required this.date, // 日付
@@ -19,7 +19,7 @@ class favoriteEvent {
 }
 
 // メインのアプリケーション
-class favorite extends HookWidget {
+class post extends HookWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -35,15 +35,15 @@ class favoriteEventList extends HookWidget {
   @override
   Widget build(BuildContext context) {
     // フックを使ってfavoriteEventsリストを状態管理
-    final favoriteEvents = useState<List<favoriteEvent>>([
-      favoriteEvent(
+    final favoriteEvents = useState<List<postEvent>>([
+      postEvent(
         name: "ハッカソン2024", 
         place: "名護市辺野古", 
         date: "2024年5月12日", // 日付
         time: "10:00〜16:00", // 時間
         img: "https://aozorataxi.okinawa/wp-content/uploads/2023/08/okinawa_eisa.png",
       ),
-      favoriteEvent(
+      postEvent(
         name: "那覇ハーリー祭り", 
         place: "那覇市", 
         date: "2024年6月3日", // 日付
