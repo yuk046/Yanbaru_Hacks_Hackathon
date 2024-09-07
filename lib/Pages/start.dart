@@ -15,15 +15,35 @@ class StartPage extends StatelessWidget {
         children: [
           SizedBox(height: deviceHeight * 0.1),
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
             // ロゴ画像
-            child: Center(
-              child: Container(
-                child: Image.asset('assets/images/munimuni.png'),
-                width: deviceWidth * 0.8,
+            child:
+              Center(
+                child: Container(
+                  child: Image.asset('assets/images/munimuni.png'),
+                  width: deviceWidth * 0.8,
+                  ),
+              ),
+          ),
+          SizedBox(height: deviceHeight * 0.1),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+            child: 
+              Center(
+                child: ElevatedButton(
+                  onPressed: () {
+                    // ボタンを押すとホーム画面に遷移
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => const HomePage(title: 'HomePage')),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color(0xffFFE2C6),
+                  ),
+                  child: Text('ゲストとしてスタート'),
                 ),
-            )
-
+              )
           ),
         ],
       ),
