@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:munimuniohagi/Pages/akinatorResultPage.dart';
 import 'package:munimuniohagi/constant/constant.dart';
 
-class AkinatorPage extends StatelessWidget {
-  const AkinatorPage({super.key});
+class AkinatorResultPage extends StatelessWidget {
+  const AkinatorResultPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -62,20 +61,13 @@ class choices extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: InkWell(
         onTap: () {
-          // showDialog(
-          //   context: context,
-          //   builder: (context) {
-          //     return AlertDialog(
-          //       title: Text('動作の確認'),
-          //     );
-          //   });
-
-          // ボタンを押すとホーム画面に遷移
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => const AkinatorResultPage()),
-            );
-          
+          showDialog(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                title: Text('動作の確認'),
+              );
+            });
         },
         child: Container(
           width: screenSize.width * 0.4,
