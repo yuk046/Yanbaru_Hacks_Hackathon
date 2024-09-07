@@ -6,9 +6,23 @@ class StartPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double deviceHeight = MediaQuery.of(context).size.height;
+    final double deviceWidth = MediaQuery.of(context).size.width;
     return Scaffold(
-      body: Center(
-        
+      body: Column(
+        children: [
+          SizedBox(height: deviceHeight * 0.1),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Center(
+              child: Container(
+                child: Image.asset('assets/images/munimuni.png'),
+                width: deviceWidth * 0.8,
+                ),
+            )
+
+          ),
+        ],
       ),
     );
   }
