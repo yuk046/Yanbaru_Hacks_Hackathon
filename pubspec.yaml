@@ -39,6 +39,7 @@ dependencies:
   riverpod_annotation: ^2.3.5
   flutter_hooks: ^0.20.5
   google_fonts: ^6.2.0
+  google_generative_ai:
 
 dev_dependencies:
   flutter_test:

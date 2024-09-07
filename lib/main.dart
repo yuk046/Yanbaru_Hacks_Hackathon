@@ -5,9 +5,10 @@ import 'package:munimuniohagi/Pages/pin.dart';
 import 'package:munimuniohagi/Pages/user.dart';
 import 'package:munimuniohagi/Pages/start.dart';
 import 'package:munimuniohagi/Pages/userpage.dart';
+import 'package:munimuniohagi/Pages/gemini.dart';
 
 
-void main() {
+void main() async{
   runApp(const MyApp());
 }
 
