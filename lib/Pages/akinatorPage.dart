@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:munimuniohagi/constant/constant.dart';
 
 class AkinatorPage extends StatelessWidget {
   const AkinatorPage({super.key});
@@ -8,6 +9,7 @@ class AkinatorPage extends StatelessWidget {
     final screenSize = MediaQuery.of(context).size;
 
     return Scaffold(
+      backgroundColor: Color(Constant.mainBackGround),
       body: Center(
         child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
