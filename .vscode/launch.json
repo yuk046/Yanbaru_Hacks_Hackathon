@@ -20,6 +20,12 @@
             "request": "launch",
             "type": "dart",
             "flutterMode": "release"
+        },
+        {
+            "name": "Flutter (lib\\env.dart)",
+            "type": "dart",
+            "request": "launch",
+            "program": "lib\\env.dart"
         }
     ]
 }
