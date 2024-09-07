@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:munimuniohagi/Pages/favorite.dart';
 
 class userPage extends HookWidget {
   const userPage({super.key});
@@ -64,12 +65,11 @@ class userPage extends HookWidget {
                 Text(
                   userName.value,
                   style: TextStyle(
-                    fontSize: 25,
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold
-                  ),
+                      fontSize: 25,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold),
                 ),
-                SizedBox(height: contentsHeight)
+                SizedBox(height: contentsHeight),
               ],
             ),
           ),
@@ -78,32 +78,29 @@ class userPage extends HookWidget {
             width: double.infinity,
             color: const Color(0xffE2C6FF),
           ),
+          // ExpandedでTabBarViewの高さを確保
           Expanded(
-            child: CustomScrollView(
-              slivers: [
-                SliverFillRemaining(
-                  child: Column(
+            child: Column(
+              children: [
+                // タブ部分
+                Container(
+                  color: Colors.white,
+                  child: TabBar(
+                    controller: _tabController,
+                    tabs: const [
+                      Tab(text: 'お気に入り'),
+                      Tab(text: '投稿'),
+                    ],
+                    indicatorColor: Color(0xffE2C6FF), // インジケーターの色を指定
+                  ),
+                ),
+                // タブビュー部分
+                Expanded(
+                  child: TabBarView(
+                    controller: _tabController,
                     children: [
-                      Container(
-                        color: Colors.white,
-                        child: TabBar(
-                          controller: _tabController,
-                          tabs: const [
-                            Tab(text: 'タブ1'),
-                            Tab(text: 'タブ2'),
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        height: 300,
-                        child: TabBarView(
-                          controller: _tabController,
-                          children: const [
-                            Center(child: Text('タブ1の内容')),
-                            Center(child: Text('タブ2の内容')),
-                          ],
-                        ),
-                      ),
+                      favorite(),
+                      Center(child: Text('タブ2の内容')),
                     ],
                   ),
                 ),
