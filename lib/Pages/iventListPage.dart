@@ -1,3 +1,6 @@
+import 'dart:convert'; // JSONデータのエンコーディングに使用
+import 'dart:io'; // CSVのファイル操作に使用
+import 'package:csv/csv.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -41,7 +44,8 @@ class EventListPage extends HookWidget {
                     return Card(
                       child: ListTile(
                         title: Text(event['name']),
-                        subtitle: Text('場所: ${event['place']}\n日付: ${event['date']}'),
+                        subtitle:
+                            Text('場所: ${event['place']}\n日付: ${event['date']}'),
                         trailing: event['img'].isNotEmpty
                             ? Image.network(event['img'], width: 50, height: 50)
                             : null,
@@ -78,6 +82,24 @@ class EventListPage extends HookWidget {
 
       // 取得したデータをstateに保存
       eventList.value = events;
+
+      // CSV形式に変換
+      List<List<dynamic>> rows = [];
+      rows.add(['Name', 'Date', 'Place', 'Image']); // ヘッダー行
+      for (var event in events) {
+        rows.add([
+          event['name'],
+          event['date'].toString(), // DateTime を文字列に変換
+          event['place'],
+          event['img']
+        ]);
+      }
+
+      // CSV データを生成
+      String csv = const ListToCsvConverter().convert(rows);
+
+      // コンソールに CSV データを出力
+      print(csv);
     } catch (e) {
       print('Error fetching events: $e');
     } finally {
@@ -85,3 +107,4 @@ class EventListPage extends HookWidget {
     }
   }
 }
+

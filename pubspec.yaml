@@ -41,6 +41,7 @@ dependencies:
   google_fonts: ^6.2.0
   firebase_core: ^3.4.0
   cloud_firestore: ^5.4.0
+  csv: ^6.0.0
   google_generative_ai:
   envied:
   json_serializable: 
@@ -56,8 +57,8 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^3.0.0
   riverpod_generator: ^2.4.0
-  build_runner: 
-  envied_generator: 
+  build_runner: ^2.1.4
+  envied_generator:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
