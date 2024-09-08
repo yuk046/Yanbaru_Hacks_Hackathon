@@ -1,14 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:munimuniohagi/Pages/chat_Contoroller.dart';
 import 'package:munimuniohagi/main.dart';
 import 'package:munimuniohagi/constant/constant.dart';
 
-class StartPage extends StatelessWidget {
+class StartPage extends ConsumerWidget {
   const StartPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,WidgetRef ref) {
+    // chat
+    final chatController = ChatController(ref);
     final double deviceHeight = MediaQuery.of(context).size.height; //端末の縦の大きさを取得
     final double deviceWidth = MediaQuery.of(context).size.width; //端末の横の大きさを取得
+
+    useEffect(() {
+      (() async {
+        final response = await chatController.sendPrompt();
+        print('AIの返答: $response');
+
+      })();
+      return null;
+    }, []);
+
     return Scaffold(
       backgroundColor: Color(Constant.backGroundColor),
       body: Column(
@@ -31,7 +46,7 @@ class StartPage extends StatelessWidget {
             child: 
               Center(
                 child: ElevatedButton(
-                  onPressed: () {
+                  onPressed: () async{
                     // ボタンを押すとホーム画面に遷移
                     Navigator.pushReplacement(
                       context,
