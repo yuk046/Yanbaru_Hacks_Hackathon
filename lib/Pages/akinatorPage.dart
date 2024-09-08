@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:munimuniohagi/Pages/gemini.dart';
 import 'package:munimuniohagi/Pages/result.dart';
 import 'package:munimuniohagi/constant/constant.dart';
+import 'package:munimuniohagi/Pages/chat_Contoroller.dart';
 
 class AkinatorPage extends HookWidget {
   const AkinatorPage({super.key});
@@ -73,7 +75,7 @@ class AkinatorPage extends HookWidget {
   }
 }
 
-class ChoiceButton extends StatelessWidget {
+class ChoiceButton extends ConsumerWidget {
   const ChoiceButton({
     super.key,
     required this.screenSize,
@@ -88,17 +90,24 @@ class ChoiceButton extends StatelessWidget {
   final VoidCallback incrementCount;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+
+    final chatController = ChatController(ref);
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: InkWell(
-        onTap: () {
+        onTap: () async {
           // testGemini();
           // ボタンを押すと結果画面に遷移
           // Navigator.pushReplacement(
           //   context,
           //   MaterialPageRoute(builder: (context) => const AkinatorResultPage()),
           // );
+          
+          //「はい」を送信する例
+              final response = await chatController.sendYesNoChoice(true);
+              print('AIの返答: $response');
           incrementCount();
         },
         child: Container(
