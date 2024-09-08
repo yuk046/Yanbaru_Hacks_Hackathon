@@ -72,8 +72,14 @@ class EventListPage extends HookWidget {
       // 取得したデータをリストに変換してセット
       final events = getDate.docs.map((doc) {
         var data = doc.data() as Map<String, dynamic>;
+        final baseTime = (data['date'] as Timestamp).toDate();
+        final addNineHours = baseTime.add(
+          const Duration(
+            hours: 9,
+          ),
+        );
         return {
-          'date': (data['date'] as Timestamp).toDate(),
+          'date': addNineHours,
           'img': data['img'],
           'name': data['name'],
           'place': data['place']
@@ -119,4 +125,3 @@ class EventListPage extends HookWidget {
     }
   }
 }
-
