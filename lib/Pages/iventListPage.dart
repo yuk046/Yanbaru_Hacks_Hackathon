@@ -87,9 +87,15 @@ class EventListPage extends HookWidget {
       List<List<dynamic>> rows = [];
       rows.add(['Name', 'Date', 'Place', 'Image']); // ヘッダー行
       for (var event in events) {
+        final baseTime = event['date'];
+        final addNineHours = baseTime.add(
+          const Duration(
+            hours: 9,
+          ),
+        );
         rows.add([
           event['name'],
-          event['date'].toString(), // DateTime を文字列に変換
+          addNineHours.toString(), // DateTime を文字列に変換
           event['place'],
           event['img']
         ]);
@@ -107,4 +113,3 @@ class EventListPage extends HookWidget {
     }
   }
 }
-

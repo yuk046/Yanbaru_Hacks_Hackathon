@@ -43,6 +43,7 @@ dependencies:
   cloud_firestore: ^5.4.0
   csv: ^6.0.0
   google_generative_ai:
+  intl: ^0.19.0
   envied:
   json_serializable: 
 
