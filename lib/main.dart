@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:munimuniohagi/Pages/akinatorPage.dart';
 import 'package:munimuniohagi/Pages/iventListPage.dart';
+import 'package:munimuniohagi/Pages/result.dart';
 import 'package:munimuniohagi/Pages/start.dart';
 import 'package:munimuniohagi/Pages/userpage.dart';
-import 'package:munimuniohagi/firebase_options.dart';
+import 'package:munimuniohagi/Pages/firebase_options.dart';
 import 'package:munimuniohagi/Pages/gemini.dart';
 
 
