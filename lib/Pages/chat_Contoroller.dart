@@ -19,9 +19,15 @@ class ChatController {
     return response;
   }
 
-  Future<void> reset() async {
+  // Future<void> reset() async {
+  //   // MessagesNotifierクラスのreply関数を呼び出す
+  //   final response = await ref.read(messagesNotifier.notifier).reset();
+  // }
+
+  Future<String> reset() async {
     // MessagesNotifierクラスのreply関数を呼び出す
     final response = await ref.read(messagesNotifier.notifier).reset();
+    return response;
   }
 }
 
