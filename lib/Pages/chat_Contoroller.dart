@@ -7,7 +7,7 @@ class ChatController {
 
   ChatController(this.ref);
 
-  Future<String> sendYesNoChoice(bool choice) async {
+   Future<String> sendYesNoChoice(bool choice) async {
     // MessagesNotifierクラスのreply関数を呼び出す
     final response = await ref.read(messagesNotifier.notifier).reply(choice);
     return response;
