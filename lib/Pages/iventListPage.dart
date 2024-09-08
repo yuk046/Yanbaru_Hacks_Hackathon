@@ -94,12 +94,24 @@ class EventListPage extends HookWidget {
           event['img']
         ]);
       }
+      
+      // for (var row in rows) {
+      //   print(row);
+      // }
 
       // CSV データを生成
-      String csv = const ListToCsvConverter().convert(rows);
+      Future<void> generateCsvAsync(List<List<dynamic>> rows) async {
+        // CSV形式に変換
+        String csv = const ListToCsvConverter(eol: '\n').convert(rows);
+        
+        // 非同期でCSVデータをコンソールに出力
+        await Future.delayed(Duration.zero, () {
+          debugPrint(csv); // CSV データを出力
+        });
+      }
 
-      // コンソールに CSV データを出力
-      print(csv);
+    generateCsvAsync(rows);
+
     } catch (e) {
       print('Error fetching events: $e');
     } finally {
