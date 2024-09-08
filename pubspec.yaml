@@ -46,6 +46,7 @@ dependencies:
   intl: ^0.19.0
   envied:
   json_serializable: 
+  flutter_chat_types: ^3.6.2
 
 dev_dependencies:
   flutter_test:
