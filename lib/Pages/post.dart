@@ -1,61 +1,84 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
 // カスタムクラス favoriteEvent
-class postEvent {
+class favoriteEvent {
   final String name;
   final String place;
-  final String date; // 日付
-  final String time; // 時間
+  final DateTime date; // 日付（DateTime型）
   final String img;
 
-  postEvent({
-    required this.name, 
-    required this.place, 
+  favoriteEvent({
+    required this.name,
+    required this.place,
     required this.date, // 日付
-    required this.time, // 時間
-    required this.img
+    required this.img,
   });
+
+  // FirestoreのドキュメントからfavoriteEventオブジェクトを生成するファクトリーメソッド
+  factory favoriteEvent.fromFirestore(DocumentSnapshot doc) {
+    Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+    
+    // TimestampをDateTimeに変換
+    Timestamp timestamp = data['date'] ?? Timestamp.now();
+    DateTime dateTime = timestamp.toDate();
+
+    return favoriteEvent(
+      name: data['name'] ?? '',
+      place: data['place'] ?? '',
+      date: dateTime, // DateTime型として格納
+      img: data['img'] ?? '',
+    );
+  }
 }
 
 // メインのアプリケーション
 class post extends HookWidget {
   @override
   Widget build(BuildContext context) {
+    // favoriteEventsリストを状態管理
+    final favoriteEvents = useState<List<favoriteEvent>>([]);
+
+    // Firestoreからデータを取得してリストに追加する非同期処理
+    useEffect(() {
+      Future<void> fetchEvent() async {
+        DocumentSnapshot doc = await FirebaseFirestore.instance
+            .collection('Event')
+            .doc("MFEAxlLfAtWSCjic7mfV")
+            .get();
+
+        if (doc.exists) {
+          favoriteEvents.value = [
+            favoriteEvent.fromFirestore(doc),
+          ];
+        }
+      }
+
+      fetchEvent(); // 非同期関数を呼び出す
+      return null; // クリーンアップ用関数は不要なためnull
+    }, []);
+
     return MaterialApp(
       home: Scaffold(
-        body: favoriteEventList(),
+        body: favoriteEventList(favoriteEvents: favoriteEvents.value),
       ),
     );
   }
 }
 
 // favoriteEventリストを表示するWidget
-class favoriteEventList extends HookWidget {
+class favoriteEventList extends StatelessWidget {
+  final List<favoriteEvent> favoriteEvents;
+
+  favoriteEventList({required this.favoriteEvents});
+
   @override
   Widget build(BuildContext context) {
-    // フックを使ってfavoriteEventsリストを状態管理
-    final favoriteEvents = useState<List<postEvent>>([
-      postEvent(
-        name: "ハッカソン2024", 
-        place: "名護市辺野古", 
-        date: "2024年5月12日", // 日付
-        time: "10:00〜16:00", // 時間
-        img: "https://aozorataxi.okinawa/wp-content/uploads/2023/08/okinawa_eisa.png",
-      ),
-      postEvent(
-        name: "那覇ハーリー祭り", 
-        place: "那覇市", 
-        date: "2024年6月3日", // 日付
-        time: "9:00〜18:00", // 時間
-        img: "https://aozorataxi.okinawa/wp-content/uploads/2023/08/okinawa_eisa.png",
-      ),
-    ]);
-
     return ListView.builder(
-      itemCount: favoriteEvents.value.length,
+      itemCount: favoriteEvents.length,
       itemBuilder: (context, index) {
-        final event = favoriteEvents.value[index];
+        final event = favoriteEvents[index];
 
         return Container(
           margin: EdgeInsets.all(10), // 四角形の外側の余白
@@ -93,7 +116,8 @@ class favoriteEventList extends HookWidget {
                     children: [
                       Text(
                         event.name,
-                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
                         overflow: TextOverflow.ellipsis, // テキストが長い場合に省略表示
                       ),
                       SizedBox(height: 5),
@@ -104,16 +128,11 @@ class favoriteEventList extends HookWidget {
                       ),
                       SizedBox(height: 5),
                       Text(
-                        event.date, // 日付の表示
+                        event.date.toString(), // 日付の表示
                         style: TextStyle(fontSize: 14, color: Colors.grey[600]),
                         overflow: TextOverflow.ellipsis, // テキストが長い場合に省略表示
                       ),
                       SizedBox(height: 5),
-                      Text(
-                        event.time, // 時間の表示
-                        style: TextStyle(fontSize: 14, color: Colors.grey[600]),
-                        overflow: TextOverflow.ellipsis, // テキストが長い場合に省略表示
-                      ),
                     ],
                   ),
                 ),
