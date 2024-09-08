@@ -106,7 +106,7 @@ class HomePage extends HookWidget {
               BottomNavigationBarItem(
                 icon: Padding(
                   padding: EdgeInsets.only(top: iconTopPadding),
-                  child: Icon(Icons.push_pin, size: 30),
+                  child: Icon(Icons.format_list_bulleted, size: 30),
                 ),
                 label: '',
               ),

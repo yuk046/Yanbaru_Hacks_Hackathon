@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:munimuniohagi/constant/constant.dart';
+import 'package:munimuniohagi/main.dart';
 
 class resultListPage extends HookWidget {
   const resultListPage({super.key});
@@ -62,9 +63,13 @@ class resultListPage extends HookWidget {
           Container(
             padding: EdgeInsets.all(8.0),
             child: ElevatedButton(
-              onPressed: () {
+              onPressed: () => {
                 // ボタンがタップされたときの処理をここに追加
-                print('ボタンが押されました');
+                print('ボタンが押されました'),
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => HomePage(title: 'Home')),
+                )
               },
               style: ElevatedButton.styleFrom(
                 shape: RoundedRectangleBorder(
