@@ -25,7 +25,7 @@ class MessagesNotifier extends StateNotifier<List<types.Message>> {
   MessagesNotifier(this.chat) : super([]);
 
   late final ChatSession chat;
-  final prompt = "以上のようなエイサー祭りがあります。私は、ある「祭り」探しています。それを当てるための質問をしてください。あなたは5回質問をした後に、答えと思われるものを答えてください。また、ルールとして以下を設けます。・「はい」か「いいえ」で答えられる質問にしてください・祭りの名前を出すのは禁止です。・このエイサー祭りの開催時間はイギリス時間なので日本時間に直して考えてください。・質問する際は｛されますか？｝ではなく｛されるものがいいですか？｝にしてください。・質問をする際はQ＋質問番号＋質問文のみを出力してください・質問に対する回答にありがとうございますなどは出力しないでください・エイサー以外の伝統芸能を聞きたいときはエイサーが含まれていないことを明示してください・日付を直接聞くのは禁止です・１回あたり1つの質問を出力してください・質問をまとめて生成するのは禁止です。・答えは祭りの名前ではなくIDで返答してください。";
+  final prompt = "以上のようなエイサー祭りがあります。私は、ある「祭り」探しています。それを当てるための質問をしてください。あなたは4回質問をした後に、答えと思われるものを答えてください。また、ルールとして以下を設けます。・「はい」か「いいえ」で答えられる質問にしてください・祭りの名前を出すのは禁止です。・このエイサー祭りの開催時間はイギリス時間なので日本時間に直して考えてください。・質問する際は｛されますか？｝ではなく｛されるものがいいですか？｝にしてください。・質問をする際はQ＋質問番号＋質問文のみを出力してください・質問に対する回答にありがとうございますなどは出力しないでください・エイサー以外の伝統芸能を聞きたいときはエイサーが含まれていないことを明示してください・日付を直接聞くのは禁止です・4回あたり1つの質問を出力してください・質問をまとめて生成するのは禁止です。・答えは祭りの名前ではなくIDだけで返答してください。もう一度言います、質問は4回質問です。どんなに答えが分かっていても、分からなくても4回質問してください。";
 
 
   
@@ -76,11 +76,19 @@ class MessagesNotifier extends StateNotifier<List<types.Message>> {
     return responseText;
   }
 
-  Future<void> reset () async {
+  Future<String> reset () async {
     addMessage(me, "今までの会話の情報は忘れてください");
     final content = Content.text("今までの会話の情報は忘れてください");
     String responseText = ''; 
+    try {
       final response = await chat.sendMessage(content);
+      responseText = response.text ?? '回答がありません。再試行してください。';
+      addMessage(gemini, responseText);
+    } catch (e) {
+      responseText = 'エラーが発生しました。再試行してください。';
+      addMessage(gemini, responseText);
+    }
+    return responseText;
   }
 
   /// bool 型の引数で「はい」か「いいえ」を送信し、AIの応答を返す関数
