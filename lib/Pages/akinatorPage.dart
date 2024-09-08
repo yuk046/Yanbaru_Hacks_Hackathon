@@ -101,9 +101,9 @@ class ChoiceButton extends ConsumerWidget {
           //   context,
           //   MaterialPageRoute(builder: (context) => const AkinatorResultPage()),
           // );
-          
-          //「はい」を送信する例
-              final response = await chatController.sendYesNoChoice(true);
+
+            //「はい」を送信する例
+              final response = await chatController.sendYesNoChoice(true); //インスタンス化したchatControllerのsendYesNoChoiceメソッドを呼び出す
               print('AIの返答: $response');
           incrementCount();
         },

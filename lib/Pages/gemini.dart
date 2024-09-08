@@ -24,8 +24,8 @@ class MessagesNotifier extends StateNotifier<List<types.Message>> {
 
     /// 初期プロンプトを送信する関数
   Future<void> sendInitialPrompt() async {
-    
-    String data = ""; // エイサーイベントのデータ
+
+    String data = ""; // エイサーイベントのデータをいれる
     String prompt = "猫の名前を５つ考えてください";
       // 'ここに初期プロンプトを入れる ${data}';
     addMessage(me, prompt);
