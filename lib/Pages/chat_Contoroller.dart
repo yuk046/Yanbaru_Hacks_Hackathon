@@ -13,3 +13,12 @@ class ChatController {
     return response;
   }
 }
+
+
+// ElevatedButton(
+//               onPressed: () async {
+//                 // 「はい」を送信する例
+//                 final response = await chatController.sendYesNoChoice(true);
+//                 print('AIの返答: $response');
+//               },
+//               child: Text('はい'),
