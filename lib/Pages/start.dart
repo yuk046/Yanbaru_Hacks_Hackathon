@@ -17,7 +17,7 @@ class StartPage extends ConsumerWidget {
       backgroundColor: Color(Constant.backGroundColor),
       body: Column(
         children: [
-          SizedBox(height: deviceHeight * 0.12),
+          SizedBox(height: deviceHeight * 0.25),
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
             // ロゴ画像
@@ -29,7 +29,7 @@ class StartPage extends ConsumerWidget {
                   ),
               ),
           ),
-          SizedBox(height: deviceHeight * 0.18),
+          SizedBox(height: deviceHeight * 0.1),
           Padding( // ゲストスタートボタン
             padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
             child: 
