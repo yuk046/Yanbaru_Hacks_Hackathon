@@ -79,6 +79,7 @@ class EventListPage extends HookWidget {
           ),
         );
         return {
+          'id' : doc.id,
           'date': addNineHours,
           'img': data['img'],
           'name': data['name'],
@@ -91,21 +92,34 @@ class EventListPage extends HookWidget {
 
       // CSV形式に変換
       List<List<dynamic>> rows = [];
-      rows.add(['Name', 'Date', 'Place', 'Image']); // ヘッダー行
+      rows.add(['id','Name', 'Date', 'Place', 'Image']); // ヘッダー行
       for (var event in events) {
         rows.add([
+          event['id'],
           event['name'],
           event['date'].toString(), // DateTime を文字列に変換
           event['place'],
           event['img']
         ]);
       }
+      
+      // for (var row in rows) {
+      //   print(row);
+      // }
 
       // CSV データを生成
-      String csv = const ListToCsvConverter().convert(rows);
+      Future<void> generateCsvAsync(List<List<dynamic>> rows) async {
+        // CSV形式に変換
+        String csv = const ListToCsvConverter(eol: '\n').convert(rows);
+        
+        // 非同期でCSVデータをコンソールに出力
+        await Future.delayed(Duration.zero, () {
+          debugPrint(csv); // CSV データを出力
+        });
+      }
 
-      // コンソールに CSV データを出力
-      print(csv);
+    generateCsvAsync(rows);
+
     } catch (e) {
       print('Error fetching events: $e');
     } finally {
