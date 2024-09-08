@@ -10,19 +10,8 @@ class StartPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context,WidgetRef ref) {
-    // chat
-    final chatController = ChatController(ref);
     final double deviceHeight = MediaQuery.of(context).size.height; //端末の縦の大きさを取得
     final double deviceWidth = MediaQuery.of(context).size.width; //端末の横の大きさを取得
-
-    useEffect(() {
-      (() async {
-        final response = await chatController.sendPrompt();
-        print('AIの返答: $response');
-
-      })();
-      return null;
-    }, []);
 
     return Scaffold(
       backgroundColor: Color(Constant.backGroundColor),

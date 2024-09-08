@@ -55,12 +55,12 @@ class MessagesNotifier extends StateNotifier<List<types.Message>> {
 
 
     Future<String> sendPrompt () async {
-      Future<String> csvData = readCsvFile().catchError((err) {
+      String csvData = await readCsvFile().catchError((err) {
       return "Error";
       });
       debugPrint("csvファイルを読み込み:$csvData");
-    addMessage(me, "$csvData$prompt");
-    final content = Content.text(prompt);
+    addMessage(me, csvData+prompt);
+    final content = Content.text(csvData+prompt);
     String responseText = ''; 
     try {
       final response = await chat.sendMessage(content);
