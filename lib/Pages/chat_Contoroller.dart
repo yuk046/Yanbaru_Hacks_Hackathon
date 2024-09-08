@@ -12,6 +12,12 @@ class ChatController {
     final response = await ref.read(messagesNotifier.notifier).reply(choice);
     return response;
   }
+
+     Future<String> sendPrompt() async {
+    // MessagesNotifierクラスのreply関数を呼び出す
+    final response = await ref.read(messagesNotifier.notifier).sendPrompt();
+    return response;
+  }
 }
 
 

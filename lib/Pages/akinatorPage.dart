@@ -9,11 +9,23 @@ import 'package:munimuniohagi/Pages/chat_Contoroller.dart';
 
 class AkinatorPage extends HookWidget {
   const AkinatorPage({super.key});
+  
 
   @override
   Widget build(BuildContext context) {
+    final chatController = ChatController(ref);
     final screenSize = MediaQuery.of(context).size;
     final count = useState(0); // ここでカウントの状態を管理
+
+      useEffect(() {
+      (() async {
+        final response = await chatController.sendPrompt();
+        print('AIの返答: $response');
+
+      })();
+      return null;
+    }, []);
+    
 
     void incrementCount() {
       count.value += 1;
@@ -88,8 +100,8 @@ class ChoiceButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
     final chatController = ChatController(ref);
+
 
     return Padding(
       padding: const EdgeInsets.all(8.0),

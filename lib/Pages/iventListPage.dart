@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:munimuniohagi/constant/constant.dart';
+import 'package:path_provider/path_provider.dart';
 
 class EventListPage extends HookWidget {
   const EventListPage({super.key});
@@ -103,27 +104,29 @@ class EventListPage extends HookWidget {
         ]);
       }
       
-      // for (var row in rows) {
-      //   print(row);
-      // }
 
-      // CSV データを生成
       Future<void> generateCsvAsync(List<List<dynamic>> rows) async {
-        // CSV形式に変換
-        String csv = const ListToCsvConverter(eol: '\n').convert(rows);
+          // CSV形式に変換
+          String csv = const ListToCsvConverter(eol: '\n').convert(rows);
+
+          // アプリケーションのドキュメントディレクトリを取得
+          final directory = await getApplicationDocumentsDirectory();
+          final path = '${directory.path}/events.csv'; // 保存するファイルのパス
+          final file = File(path);
+
+          // CSVデータをファイルに書き込み
+          await file.writeAsString(csv);
+
+          print('CSVファイルが保存されました: $path');
+        }
+
         
-        // 非同期でCSVデータをコンソールに出力
-        await Future.delayed(Duration.zero, () {
-          debugPrint(csv); // CSV データを出力
-        });
-      }
-
-    generateCsvAsync(rows);
-
+      generateCsvAsync(rows);
     } catch (e) {
       print('Error fetching events: $e');
     } finally {
       isLoading.value = false;
     }
+
   }
 }
