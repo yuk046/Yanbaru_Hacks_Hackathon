@@ -20,7 +20,7 @@ class Gemini {
 
 void testGemini() async {
   final gemini = Gemini();
-  final response = await gemini.getText("人気なスポーツを５つ答えてください");
+  final response = await gemini.getText("はいかいいえで考えられる質問を一つを考えてください");
   print(response);
 }
 
