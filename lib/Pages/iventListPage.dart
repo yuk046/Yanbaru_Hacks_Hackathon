@@ -79,6 +79,7 @@ class EventListPage extends HookWidget {
           ),
         );
         return {
+          'id' : doc.id,
           'date': addNineHours,
           'img': data['img'],
           'name': data['name'],
@@ -91,9 +92,10 @@ class EventListPage extends HookWidget {
 
       // CSV形式に変換
       List<List<dynamic>> rows = [];
-      rows.add(['Name', 'Date', 'Place', 'Image']); // ヘッダー行
+      rows.add(['id','Name', 'Date', 'Place', 'Image']); // ヘッダー行
       for (var event in events) {
         rows.add([
+          event['id'],
           event['name'],
           event['date'].toString(), // DateTime を文字列に変換
           event['place'],
