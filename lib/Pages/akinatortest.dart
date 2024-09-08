@@ -38,10 +38,17 @@ class Akinatortest extends ConsumerWidget {
 
     // AIからの質問の取得
     Future<void> getAiQuestion(bool choice) async {
-      final chatController = ChatController(ref);
-      final newResponse = await chatController.sendYesNoChoice(choice);
-      ref.read(responseNotifierProvider.notifier).state = newResponse;
-      print('AIの返答: $newResponse');
+      try {
+        final chatController = ChatController(ref);
+        final newResponse = await chatController.sendYesNoChoice(choice);
+        // ウィジェットがまだ存在するか確認
+        if (context.mounted) {
+          ref.read(responseNotifierProvider.notifier).state = newResponse;
+        }
+        print('AIの返答: $newResponse');
+      } catch (e) {
+        print("Error fetching AI question: $e");
+      }
     }
 
     return Scaffold(
@@ -59,14 +66,20 @@ class Akinatortest extends ConsumerWidget {
               height: screenSize.height * 0.08,
             ),
             // 質問の表示
-            Text(
-              "Q$count. $response",
-              style: TextStyle(
-                fontSize: 25,
+            Container(
+              height: screenSize.height * 0.15,
+              width: screenSize.width * 0.8,
+              child: SingleChildScrollView(
+                child: Text(
+                  "Q$count. $response",
+                  style: TextStyle(
+                    fontSize: 25,
+                  ),
+                ),
               ),
             ),
             SizedBox(
-              height: screenSize.height * 0.05,
+              height: screenSize.height * 0.01,
             ),
             // 選択肢を表示
             Row(
