@@ -59,7 +59,7 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^3.0.0
   riverpod_generator: ^2.4.0
-  build_runner: ^2.1.4
+  build_runner: ^2.4.9
   envied_generator:
 
 # For information on the generic Dart part of this file, see the
