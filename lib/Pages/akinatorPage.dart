@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:munimuniohagi/Pages/gemini.dart';
@@ -32,7 +31,7 @@ class AkinatorPage extends HookWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             // ロゴの表示
-            Container(
+            SizedBox(
               width: screenSize.width * 0.8,
               child: Image.asset('assets/images/munimuni.png'),
             ),
@@ -56,11 +55,13 @@ class AkinatorPage extends HookWidget {
                 ChoiceButton(
                   screenSize: screenSize,
                   label: 'はい',
+                  choice: true,
                   incrementCount: incrementCount,
                 ),
                 ChoiceButton(
                   screenSize: screenSize,
                   label: 'いいえ',
+                  choice: false,
                   incrementCount: incrementCount,
                 ),
               ],
@@ -77,11 +78,13 @@ class ChoiceButton extends StatelessWidget {
     super.key,
     required this.screenSize,
     required this.label,
+    required this.choice,
     required this.incrementCount,
   });
 
   final Size screenSize;
   final String label;
+  final bool choice;
   final VoidCallback incrementCount;
 
   @override
