@@ -5,15 +5,17 @@ import 'package:munimuniohagi/env/env.dart';
 
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 
-final generativeModelProvider = Provider<GenerativeModel>((ref) => GenerativeModel(
-  model: 'gemini-pro',
-  apiKey: Env.key,
-));
+final generativeModelProvider =
+    Provider<GenerativeModel>((ref) => GenerativeModel(
+          model: 'gemini-pro',
+          apiKey: Env.key,
+        ));
 
 const gemini = types.User(id: 'gemini');
 const me = types.User(id: 'user');
 
-final messagesNotifier = StateNotifierProvider<MessagesNotifier, List<types.Message>>((ref) {
+final messagesNotifier =
+    StateNotifierProvider<MessagesNotifier, List<types.Message>>((ref) {
   return MessagesNotifier(ref.watch(generativeModelProvider).startChat());
 });
 
@@ -22,13 +24,13 @@ class MessagesNotifier extends StateNotifier<List<types.Message>> {
 
   late final ChatSession chat;
 
-    /// 初期プロンプトを送信する関数
+  /// 初期プロンプトを送信する関数
   Future<void> sendInitialPrompt() async {
-    
     String data = ""; // エイサーイベントのデータ
-    String prompt = "猫の名前を５つ考えてください";
-      // 'ここに初期プロンプトを入れる ${data}';
+    String prompt = "はいかいいえでこたえられる質問を考えてください";
+    // 'ここに初期プロンプトを入れる ${data}';
     addMessage(me, prompt);
+    print(prompt);
     final content = Content.text(prompt);
     try {
       final response = await chat.sendMessage(content);
@@ -42,7 +44,8 @@ class MessagesNotifier extends StateNotifier<List<types.Message>> {
   /// メッセージをリストに追加する関数
   void addMessage(types.User author, String text) {
     final timeStamp = DateTime.now().millisecondsSinceEpoch.toString();
-    final message = types.TextMessage(author: author, id: timeStamp, text: text);
+    final message =
+        types.TextMessage(author: author, id: timeStamp, text: text);
     state = [message, ...state];
   }
 

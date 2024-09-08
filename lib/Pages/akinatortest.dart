@@ -1,29 +1,47 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:munimuniohagi/Pages/gemini.dart';
+import 'package:munimuniohagi/Pages/chat_Contoroller.dart';
+import 'package:munimuniohagi/Pages/count.dart';
 import 'package:munimuniohagi/Pages/result.dart';
 import 'package:munimuniohagi/constant/constant.dart';
-import 'package:munimuniohagi/Pages/chat_Contoroller.dart';
 
-class AkinatorPage extends HookWidget {
-  const AkinatorPage({super.key});
+// AIからの質問を管理するプロバイダー
+final responseNotifierProvider = StateProvider<String>((ref) => "質問を表示する？");
+
+class Akinatortest extends ConsumerWidget {
+  const Akinatortest({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    // 画面サイズの取得
     final screenSize = MediaQuery.of(context).size;
-    final count = useState(0); // ここでカウントの状態を管理
+    // count watch
+    final count = ref.watch(countNotifierProvider);
+    // response watch
+    final response = ref.watch(responseNotifierProvider);
 
+    // データの更新
     void incrementCount() {
-      count.value += 1;
-      print(count.value);
-      if (count.value == 5) {
-        //5回回答すると結果画面に遷移
+      // countNotifierを呼ぶ
+      final notifier = ref.read(countNotifierProvider.notifier);
+      // countデータの変更
+      notifier.updateState();
+      print(count);
+      if (count == 5) {
+        // 5回回答すると結果画面に遷移
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => const resultPage()),
         );
       }
+    }
+
+    // AIからの質問の取得
+    Future<void> getAiQuestion(bool choice) async {
+      final chatController = ChatController(ref);
+      final newResponse = await chatController.sendYesNoChoice(choice);
+      ref.read(responseNotifierProvider.notifier).state = newResponse;
+      print('AIの返答: $newResponse');
     }
 
     return Scaffold(
@@ -42,7 +60,7 @@ class AkinatorPage extends HookWidget {
             ),
             // 質問の表示
             Text(
-              "Q. 質問を表示する？",
+              "Q$count. $response",
               style: TextStyle(
                 fontSize: 25,
               ),
@@ -59,12 +77,14 @@ class AkinatorPage extends HookWidget {
                   label: 'はい',
                   choice: true,
                   incrementCount: incrementCount,
+                  getAiQuestion: getAiQuestion, // コールバックを渡す
                 ),
                 ChoiceButton(
                   screenSize: screenSize,
                   label: 'いいえ',
                   choice: false,
                   incrementCount: incrementCount,
+                  getAiQuestion: getAiQuestion, // コールバックを渡す
                 ),
               ],
             ),
@@ -75,33 +95,30 @@ class AkinatorPage extends HookWidget {
   }
 }
 
-class ChoiceButton extends ConsumerWidget {
+class ChoiceButton extends StatelessWidget {
   const ChoiceButton({
     super.key,
     required this.screenSize,
     required this.label,
     required this.choice,
     required this.incrementCount,
+    required this.getAiQuestion,
   });
 
   final Size screenSize;
   final String label;
   final bool choice;
   final VoidCallback incrementCount;
+  final Future<void> Function(bool) getAiQuestion; // コールバックの型を指定
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-
-    final chatController = ChatController(ref);
-
+  Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: InkWell(
         onTap: () async {
           incrementCount();
-          //「はい」か「いいえ」を送信する
-          final response = await chatController.sendYesNoChoice(true);
-          print('AIの返答: $response');
+          await getAiQuestion(choice); // レスポンスを取得
         },
         child: Container(
           width: screenSize.width * 0.4,
