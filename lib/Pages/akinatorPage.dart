@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:munimuniohagi/Pages/akinatorResultPage.dart';
 import 'package:munimuniohagi/Pages/gemini.dart';
+import 'package:munimuniohagi/Pages/result.dart';
 import 'package:munimuniohagi/constant/constant.dart';
 
 class AkinatorPage extends HookWidget {
@@ -20,7 +20,7 @@ class AkinatorPage extends HookWidget {
         //5回回答すると結果画面に遷移
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => const AkinatorResultPage()),
+          MaterialPageRoute(builder: (context) => const resultPage()),
         );
       }
     }

@@ -26,7 +26,7 @@ class resultPage extends HookWidget {
             Text(
               "あなたへのおすすめ",
               style: TextStyle(
-                fontSize: 20.0, // フォントサイズ
+                fontSize: 25.0, // フォントサイズ
                 color: Colors.black, // テキストの色
               ),
             ),
