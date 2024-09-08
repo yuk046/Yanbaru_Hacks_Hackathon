@@ -6,7 +6,7 @@ import 'package:munimuniohagi/Pages/result.dart';
 import 'package:munimuniohagi/constant/constant.dart';
 
 // AIからの質問を管理するプロバイダー
-final responseNotifierProvider = StateProvider<String>((ref) => "質問を表示する？");
+final responseNotifierProvider = StateProvider<String>((ref) => "Q0. 質問を表示する？");
 
 class Akinatortest extends ConsumerWidget {
   const Akinatortest({super.key});
@@ -19,7 +19,6 @@ class Akinatortest extends ConsumerWidget {
     final count = ref.watch(countNotifierProvider);
     // response watch
     final response = ref.watch(responseNotifierProvider);
-    
 
     // データの更新
     void incrementCount() {
@@ -72,7 +71,7 @@ class Akinatortest extends ConsumerWidget {
               width: screenSize.width * 0.8,
               child: SingleChildScrollView(
                 child: Text(
-                  "Q$count. $response",
+                  "$response",
                   style: TextStyle(
                     fontSize: 25,
                   ),
@@ -126,21 +125,24 @@ class ChoiceButton extends ConsumerWidget {
   final Future<void> Function(bool) getAiQuestion; // コールバックの型を指定
 
   @override
-  Widget build(BuildContext context,WidgetRef ref) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final count = ref.watch(countNotifierProvider);
     final chatController = ChatController(ref);
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: InkWell(
         onTap: () async {
-          if(count == 0){
+          // 1つ目の質問の表示
+          if (count == 0) {
             final response = await chatController.sendPrompt();
+            ref.read(responseNotifierProvider.notifier).state = response;
             print('AIの返答: $response');
             incrementCount();
-          }else{
-          incrementCount();
-          await getAiQuestion(choice);
-           } // レスポンスを取得
+          } else {
+            incrementCount();
+            await getAiQuestion(choice); // 2回目以降は Yes/No 質問
+          }
         },
         child: Container(
           width: screenSize.width * 0.4,
