@@ -6,7 +6,7 @@ class CountNotifier extends _$CountNotifier {
   @override
   int build() {
     // 最初のデータ
-    return 1;
+    return 0;
   }
 
   // データを変更する関数

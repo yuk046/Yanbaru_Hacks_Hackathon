@@ -19,6 +19,7 @@ class Akinatortest extends ConsumerWidget {
     final count = ref.watch(countNotifierProvider);
     // response watch
     final response = ref.watch(responseNotifierProvider);
+    
 
     // データの更新
     void incrementCount() {
@@ -108,7 +109,7 @@ class Akinatortest extends ConsumerWidget {
   }
 }
 
-class ChoiceButton extends StatelessWidget {
+class ChoiceButton extends ConsumerWidget {
   const ChoiceButton({
     super.key,
     required this.screenSize,
@@ -125,13 +126,21 @@ class ChoiceButton extends StatelessWidget {
   final Future<void> Function(bool) getAiQuestion; // コールバックの型を指定
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,WidgetRef ref) {
+    final count = ref.watch(countNotifierProvider);
+    final chatController = ChatController(ref);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: InkWell(
         onTap: () async {
+          if(count == 0){
+            final response = await chatController.sendPrompt();
+            print('AIの返答: $response');
+            incrementCount();
+          }else{
           incrementCount();
-          await getAiQuestion(choice); // レスポンスを取得
+          await getAiQuestion(choice);
+           } // レスポンスを取得
         },
         child: Container(
           width: screenSize.width * 0.4,
