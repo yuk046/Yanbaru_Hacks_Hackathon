@@ -7,15 +7,17 @@ import '../utils/readCsvFile.dart';
 
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 
-final generativeModelProvider = Provider<GenerativeModel>((ref) => GenerativeModel(
-  model: 'gemini-pro',
-  apiKey: Env.key,
-));
+final generativeModelProvider =
+    Provider<GenerativeModel>((ref) => GenerativeModel(
+          model: 'gemini-pro',
+          apiKey: Env.key,
+        ));
 
 const gemini = types.User(id: 'gemini');
 const me = types.User(id: 'user');
 
-final messagesNotifier = StateNotifierProvider<MessagesNotifier, List<types.Message>>((ref) {
+final messagesNotifier =
+    StateNotifierProvider<MessagesNotifier, List<types.Message>>((ref) {
   return MessagesNotifier(ref.watch(generativeModelProvider).startChat());
 });
 
@@ -25,7 +27,6 @@ class MessagesNotifier extends StateNotifier<List<types.Message>> {
   late final ChatSession chat;
   final prompt = "以上のようなエイサー祭りがあります。私は、ある「祭り」探しています。それを当てるための質問をしてください。あなたは5回質問をした後に、答えと思われるものを答えてください。また、ルールとして以下を設けます。・「はい」か「いいえ」で答えられる質問にしてください・祭りの名前を出すのは禁止です。・このエイサー祭りの開催時間はイギリス時間なので日本時間に直して考えてください。・質問する際は｛されますか？｝ではなく｛されるものがいいですか？｝にしてください。・質問をする際はQ＋質問番号＋質問文のみを出力してください・質問に対する回答にありがとうございますなどは出力しないでください・エイサー以外の伝統芸能を聞きたいときはエイサーが含まれていないことを明示してください・日付を直接聞くのは禁止です・１回あたり1つの質問を出力してください・質問をまとめて生成するのは禁止です";
   
-
 
     /// 初期プロンプトを送信する関数
   // Future<void> sendInitialPrompt() async {
@@ -47,7 +48,8 @@ class MessagesNotifier extends StateNotifier<List<types.Message>> {
   /// メッセージをリストに追加する関数
   void addMessage(types.User author, String text) {
     final timeStamp = DateTime.now().millisecondsSinceEpoch.toString();
-    final message = types.TextMessage(author: author, id: timeStamp, text: text);
+    final message =
+        types.TextMessage(author: author, id: timeStamp, text: text);
     state = [message, ...state];
   }
 

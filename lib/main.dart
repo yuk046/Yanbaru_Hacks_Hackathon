@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:munimuniohagi/Pages/akinatorPage.dart';
+import 'package:munimuniohagi/Pages/akinatortest.dart';
 import 'package:munimuniohagi/Pages/iventListPage.dart';
 import 'package:munimuniohagi/Pages/result.dart';
 import 'package:munimuniohagi/Pages/start.dart';
@@ -61,7 +62,7 @@ class HomePage extends HookWidget {
 
     // 各タブに表示するページのリスト
     final List<Widget> _pages = <Widget>[
-      const AkinatorPage(),
+      const Akinatortest(),
       const EventListPage(),
       const userPage()
     ];
