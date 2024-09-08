@@ -42,6 +42,8 @@ dependencies:
   firebase_core: ^3.4.0
   cloud_firestore: ^5.4.0
   google_generative_ai:
+  envied:
+  json_serializable: 
 
 dev_dependencies:
   flutter_test:
@@ -54,6 +56,8 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^3.0.0
   riverpod_generator: ^2.4.0
+  build_runner: 
+  envied_generator: 
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
