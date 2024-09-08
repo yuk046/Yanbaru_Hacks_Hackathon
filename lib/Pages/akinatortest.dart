@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:munimuniohagi/Pages/chat_Contoroller.dart';
 import 'package:munimuniohagi/Pages/count.dart';
+import 'package:munimuniohagi/Pages/response.dart';
 import 'package:munimuniohagi/Pages/result.dart';
 import 'package:munimuniohagi/constant/constant.dart';
-
-// AIからの質問を管理するプロバイダー
-final responseNotifierProvider = StateProvider<String>((ref) => "Q0. 質問を表示する？");
 
 class Akinatortest extends ConsumerWidget {
   const Akinatortest({super.key});
