@@ -44,6 +44,7 @@ dependencies:
   csv: ^6.0.0
   google_generative_ai:
   envied:
+  json_serializable: 
 
 dev_dependencies:
   flutter_test:
