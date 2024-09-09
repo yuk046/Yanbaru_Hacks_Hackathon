@@ -48,7 +48,8 @@ class Akinatortest extends ConsumerWidget {
 
     // responseが更新されたら画面遷移
     ref.listen<String>(responseNotifierProvider, (previousResponse, currentResponse) {
-      if (currentResponse.isNotEmpty && count == 5) {
+      //if (currentResponse.isNotEmpty && count == 5) {
+      if (currentResponse.isNotEmpty && response.length == 20) {
         // responseが更新され、かつ3回目の回答が終わったら結果画面に遷移
         Navigator.pushReplacement(
           context,
