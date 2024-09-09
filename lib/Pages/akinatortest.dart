@@ -25,12 +25,9 @@ class Akinatortest extends ConsumerWidget {
       // countデータの変更
       notifier.updateState();
       print(count);
-      if (count == 5) {
+      if (count == 3) {
         // 5回回答すると結果画面に遷移
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => const resultPage()),
-        );
+        // 遷移のタイミングをListenerに任せるので削除
       }
     }
 
@@ -48,6 +45,17 @@ class Akinatortest extends ConsumerWidget {
         print("Error fetching AI question: $e");
       }
     }
+
+    // responseが更新されたら画面遷移
+    ref.listen<String>(responseNotifierProvider, (previousResponse, currentResponse) {
+      if (currentResponse.isNotEmpty && count == 5) {
+        // responseが更新され、かつ3回目の回答が終わったら結果画面に遷移
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const resultPage()),
+        );
+      }
+    });
 
     return Scaffold(
       backgroundColor: Color(Constant.mainBackGroundColor),
