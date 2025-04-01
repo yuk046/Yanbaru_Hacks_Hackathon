@@ -52,6 +52,7 @@ class Akinatortest extends ConsumerWidget {
       if (currentResponse.isNotEmpty && response.length == 20) {
         // responseが更新され、かつ3回目の回答が終わったら結果画面に遷移
         Navigator.pushReplacement(
+          
           context,
           MaterialPageRoute(builder: (context) => const resultPage()),
         );
